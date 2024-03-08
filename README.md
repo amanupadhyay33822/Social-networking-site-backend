@@ -49,4 +49,4 @@ This repository contains the backend code for a social media platform i am built
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/Tariq-Monowa/express-social-media-backend.git
+   git clone https://github.com/amanupadhyay33822/Social-networking-site-backend.git

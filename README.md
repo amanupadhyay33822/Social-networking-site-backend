@@ -38,6 +38,37 @@ This repository contains the backend code for a social media platform i am built
   - Create a new comment on a post
   - Update a comment
   - Delete a comment
+
+# Usage :
+
+1. Fork the repo and then clone it or download it.
+
+2. First install all dependencies:
+
+     ```bash
+     # with npm
+     npm install
+
+     # or with yarn
+     yarn
+     ```
+
+3. Create a `config/config.js` file and insert the following code it will contains all code variables. Replace values with yours !!!
+
+     ```javascript
+     "This will be provided soon";
+     ```
+
+4. Start the server
+     ```javascript
+     npm run dev
+     ```
+5. Now run the app
+     ```javacript
+     npm start
+     ```
+
+
     
 ## File Structure
 - routes: Contains route handlers for different entities (users, posts, comments, notifications, friendships).

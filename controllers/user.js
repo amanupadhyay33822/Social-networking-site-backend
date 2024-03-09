@@ -229,41 +229,41 @@ exports.logout = async (req,res) => {
   }
 }
 
-// exports.updatePassword = async (req,res) => {
-//   try {
-//       //find user 
-//       console.log(req.user)
-//       const user = await User.findById(user._id).select("+password");
+exports.updatePassword = async (req,res) => {
+  try {
+      //find user 
+      console.log(req.user)
+      const user = await User.findById(user._id).select("+password");
      
-//       //fetch data
-//       const {oldPassword,newPassword} = req.body;
-//       //check for no entry
-//       if(!oldPassword || !newPassword){
-//         return res.status(404).json({
-//           sucess: false,
-//           message: "Please enter all information about password"
-//         })
-//       }
-//       const isMatch =  await user.matchPassword(oldPassword)
-//       if(!isMatch){
-//         return res.status(404).json({
-//           sucess: false,
-//           message: "incorrect old password"
-//         })
-//       }
+      //fetch data
+      const {oldPassword,newPassword} = req.body;
+      //check for no entry
+      if(!oldPassword || !newPassword){
+        return res.status(404).json({
+          sucess: false,
+          message: "Please enter all information about password"
+        })
+      }
+      const isMatch =  await user.matchPassword(oldPassword)
+      if(!isMatch){
+        return res.status(404).json({
+          sucess: false,
+          message: "incorrect old password"
+        })
+      }
 
-//         password = newPassword
-//        return res.status(200).json({
-//         sucess: true,
-//         message: "Password updated successfully"
-//       })
+        password = newPassword
+       return res.status(200).json({
+        sucess: true,
+        message: "Password updated successfully"
+      })
 
 
-//   } catch (error) {
-//     return  res.status(400).json({
-//       sucess: false,
+  } catch (error) {
+    return  res.status(400).json({
+      sucess: false,
      
-//       message:error.message
-//   })
-//   }
-// }
+      message:error.message
+  })
+  }
+}

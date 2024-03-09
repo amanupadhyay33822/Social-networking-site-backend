@@ -56,7 +56,9 @@ This repository contains the backend code for a social media platform i am built
 3. Create a `config/config.js` file and insert the following code it will contains all code variables. Replace values with yours !!!
 
      ```javascript
-     "This will be provided soon";
+     MONGODB_URL
+     PORT
+     JWT_SECRET
      ```
 
 4. Start the server

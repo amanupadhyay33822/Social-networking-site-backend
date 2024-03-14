@@ -5,6 +5,7 @@ require("dotenv").config({path:"config/.env"});
 
 exports.isAuthenticated = async (req,res, next) => {
     try{ 
+        
        //fetch token
        const token = req.body.token || req.cookies.token || req.header("Authorization").replace("Bearer ", "");
     //check for empty token
@@ -41,4 +42,3 @@ exports.isAuthenticated = async (req,res, next) => {
      
 }
 
-//http://localhost:3000/api/v1/login

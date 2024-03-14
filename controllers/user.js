@@ -292,10 +292,10 @@ exports.logout = async (req, res) => {
 
 // exports.updatePassword = async (req,res) => {
 //   try {
-//       //find user
+//       //find user 
 //       console.log(req.user)
 //       const user = await User.findById(user._id).select("+password");
-
+     
 //       //fetch data
 //       const {oldPassword,newPassword} = req.body;
 //       //check for no entry
@@ -319,76 +319,12 @@ exports.logout = async (req, res) => {
 //         message: "Password updated successfully"
 //       })
 
+
 //   } catch (error) {
 //     return  res.status(400).json({
 //       sucess: false,
-
+     
 //       message:error.message
 //   })
 //   }
 // }
-
-exports.viewUserProfile = async (req, res) => {
-  try {
-    const username = req.params.id;
-    if (!username) {
-      return res.status(404).json({
-        success: false,
-        message: "Username is required",
-      });
-    }
-    // Find the user based on user ID or username
-    console.log(username);
-
-    const user = await User.findOne({ username });
-    console.log(user);
-
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: "User not found",
-      });
-    }
-    // Return user profile data
-    return res.status(200).json({
-      success: true,
-      user,
-      message: "User profile retrieved successfully",
-    });
-  } catch (err) {
-    return res.status(500).json({
-      success: false,
-      message: err.message,
-    });
-  }
-};
-
-
-exports.getFollowingAndFollowers = async (req, res) => {
-  try {
-    // Find the user based on the user ID provided in the request
-    const user = await User.findById(req.params.userId)
-      .populate("following", "username") // Populate the 'following' field with only the 'username' field of each user
-      .populate("followers", "username"); // Populate the 'followers' field with only the 'username' field of each user
-
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: "User not found",
-      });
-    }
-
-    // Return the list of users the user is following and who is following them
-    return res.status(200).json({
-      success: true,
-      following: user.following,
-      followers: user.followers,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: "Internal server error",
-    });
-  }
-};
-

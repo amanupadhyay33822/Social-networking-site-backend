@@ -5,10 +5,11 @@ require("dotenv").config({path:"config/.env"});
 
 exports.isAuthenticated = async (req,res, next) => {
     try{ 
-        console.log("hii")
        //fetch token
        const token = req.body.token || req.cookies.token || req.header("Authorization").replace("Bearer ", "");
     //check for empty token
+    console.log(token)
+
     if(!token){
         return res.status(401).json({
             success:false,

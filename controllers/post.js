@@ -148,3 +148,104 @@ exports.getPostOfFollowing = async (req, res) => {
     });
   }
 };
+
+exports.getPostsByUser = async (req, res) => {
+  try {
+    // Find the user
+    const user = await User.findById(req.params.userId);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    // Find all posts by the user
+    const posts = await Post.find({ owner: user._id });
+
+    return res.status(200).json({
+      success: true,
+      posts,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
+
+exports.updatePost = async (req, res) => {
+  try {
+    // Find the post by ID
+    const post = await Post.findById(req.params.postId);
+  
+    if (!post) {
+      return res.status(404).json({
+        success: false,
+        message: "Post not found",
+      });
+    }
+   
+
+    // Check if the user making the request is the owner of the post
+    if (post.owner.toString() !== req.user._id.toString()) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized to update this post",
+      });
+    }
+    // Update the post data
+    post.caption = req.body.caption || post.caption;
+    
+    // Save the updated post
+    const updatedPost = await post.save();
+    
+    return res.status(200).json({
+      success: true,
+      post: updatedPost,
+      message: "Post updated successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
+
+
+exports.getLatestPostsFromFollowing = async (req, res) => {
+  try {
+    // Find the user who is making the request
+    const user = await User.findById(req.user._id);
+   console.log(user);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    // Get the list of users that the given user follows
+    const following = user.following;
+
+    // Find the latest posts from these users
+    const latestPosts = await Post.find({ owner: { $in: following } })
+      .sort({ createdAt: -1 }) // Sort by createdAt field in descending order to get latest posts first
+      .populate("owner", "username"); // Populate the owner field with username
+
+    return res.status(200).json({
+      success: true,
+      posts: latestPosts,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};

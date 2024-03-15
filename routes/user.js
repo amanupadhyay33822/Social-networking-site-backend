@@ -9,6 +9,7 @@ const {
   viewUserProfile,
   deleteUserProfile,
   getFollowingAndFollowers,
+  getUserProfile,
 } = require("../controllers/user");
 const { isAuthenticated } = require("../middleware/auth");
 
@@ -18,11 +19,11 @@ router.post("/register", register);
 router.post("/login", login);
 router.get("/follow/:id", isAuthenticated, followUser);
 router.post("/update", updateUser);
-router.put('/user/update-password', isAuthenticated, updatePassword);
-router.get("/user/:id", viewUserProfile);
-router.delete("/delete/:id",isAuthenticated ,deleteUserProfile);
+router.put("/user/update-password", isAuthenticated, updatePassword);
+router.get("/user/:username", isAuthenticated, getUserProfile);
+router.delete("/delete/:id", isAuthenticated, deleteUserProfile);
 router.get("/followers-following/:userId", getFollowingAndFollowers);
-// router.get("/logout",logout)
-// router.put("/update/password",isAuthenticated, updatePassword)
+router.get("/logout", logout);
+router.put("/update/password", isAuthenticated, updatePassword);
 
 module.exports = router;

@@ -8,8 +8,14 @@ This repository contains the backend code for a social media platform I built wi
   - Create a new user
   - Update password
   - Login user
-  - Get user profile
+  - Get a user profile
   - Logout profile
+  -  Follow and Unfollow user
+  -  Update user details
+  -  Update Password
+  -  Delete user profile
+  -  Get  List of followers and following
+    
 
 - **Posts:**
   - Create a new post
@@ -19,6 +25,8 @@ This repository contains the backend code for a social media platform I built wi
   - Update a post
   - Delete a post
   - Like/Unlike a post
+  - get Latest post of following
+    
 
 
 # Usage :
